@@ -1,7 +1,68 @@
 
-Example Graph 2 Output:
-DFS
-"User created graph: [(0,0,[1,2,3]),(1,1,[5,4,0]),(2,2,[4,0]),(3,3,[0]),(4,4,[1,2]),(5,5,[1])]"
-"Haskell generated graph: array (0,5) [(0,[1,2,3]),(1,[5,4,0]),(2,[4,0]),(3,[0]),(4,[1,2]),(5,[1])]"
-[Node {rootLabel = 0, subForest = [Node {rootLabel = 1, subForest = [Node {rootLabel = 5, subForest = []},Node {rootLabel = 4, subForest = [Node {rootLabel = 2, subForest = []}]}]},Node {rootLabel = 3, subForest = []}]}]     
-Done!
+Example Graph 1 Output:
+Imput your choice: 'Sorts' or 'Graphs'
+Graphs
+Enter how many nodes you wish to create:
+6
+Enter Edges for node 0. E.g entering '1 5 2' would create edges between nodes 1, 5 and 2.
+1 2
+Enter Edges for node 1. E.g entering '1 5 2' would create edges between nodes 1, 5 and 2.
+2 3
+Enter Edges for node 2. E.g entering '1 5 2' would create edges between nodes 1, 5 and 2.
+3
+Enter Edges for node 3. E.g entering '1 5 2' would create edges between nodes 1, 5 and 2.
+4
+Enter Edges for node 4. E.g entering '1 5 2' would create edges between nodes 1, 5 and 2.
+0 1 5
+Enter Edges for node 5. E.g entering '1 5 2' would create edges between nodes 1, 5 and 2.
+
+"User created graph: [(0,0,[1,2]),(1,1,[2,3]),(2,2,[3]),(3,3,[4]),(4,4,[0,1,5]),(5,5,[])]"
+"Haskell generated graph: array (0,5) [(0,[1,2]),(1,[2,3]),(2,[3]),(3,[4]),(4,[0,1,5]),(5,[])]"
+Options:
+ 1: list vertices
+ 2: list edges
+ 3: transpose graph for next turn
+ 4: dfs
+ 5: list reachable nodes from x
+ 6: path (returns bool if there's a path from x to y)
+ 7: dfs levels (returns a list of lists, each element represnts a node and the eges dfs traversed)
+Enter Choice Number:
+1
+[0,1,2,3,4,5]
+
+Enter Choice Number:
+2
+[(0,1),(0,2),(1,2),(1,3),(2,3),(3,4),(4,0),(4,1),(4,5)]
+
+Enter Choice Number:
+4
+Enter Root Num:
+0
+[0,1,2,3,4,5]
+
+Enter Choice Number:
+7
+Enter Root Num:
+0
+[[0],[1],[2],[3],[4],[5]]
+
+Enter Choice Number:
+7
+Enter Root Num:
+1
+[[1],[2],[3],[4],[0,5]]
+
+Enter Choice Number:
+5
+Enter Root Num:
+5
+[5]
+
+Enter Choice Number:
+3
+
+Enter Choice Number:
+5
+Enter Root Num:
+5
+[5,4,3,2,1,0]
