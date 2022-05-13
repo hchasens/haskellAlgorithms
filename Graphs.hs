@@ -8,11 +8,48 @@ import Data.Foldable
 
 
 forestDecode :: Forest a -> [a]
-forestDecode x = toList $ head x
+forestDecode x = toList $ head x -- can only decode a Forest with n = 1 root (but in this case that's all we'll probably have)
+-- forestDecode = concatMap toList -- no sperator between trees
 
-dfs :: Graph -> Int -> IO ()
-dfs graph root = print "t"
+--locDfs :: Graph -> Int -> IO () -- Local version of dfs for library dfs call
+--locDfs graph root = print $ forestDecode $ Data.Graph.dfs graph [root]  -- print (the decoded forest of (dfs of (graph, starting at root)))
 
+-- Primes the dfs algorithm
+dfsPrimer :: Graph -> IO ()
+dfsPrimer graph = do
+    putStrLn "Enter Root Num: "
+    ns <- getLine
+    let n = read ns :: Int 
+    print $ forestDecode $ dfs graph [n]
+
+
+-- Primes the reachable algorithm
+reachablePrimer :: Graph -> IO ()
+reachablePrimer graph = do
+    putStrLn "Enter Root Num: "
+    ns <- getLine
+    let n = read ns :: Int 
+    print $ reachable graph n
+
+
+-- Primes the path algorithm
+pathPrimer :: Graph -> IO ()
+pathPrimer graph = do
+    putStrLn "Enter x node num: "
+    xstr <- getLine
+    let x = read xstr :: Int
+    putStrLn "Enter y node num: "
+    ystr <- getLine
+    let y = read ystr :: Int 
+    print $ path graph x y
+
+
+levelsPrimer :: Graph -> IO ()
+levelsPrimer graph = do
+    putStrLn "Enter Root Num: "
+    ns <- getLine
+    let n = read ns :: Int 
+    print $ levels $ head $ dfs graph [n] -- dfs returns a forest, levels takes a tree, take the first tree (there's only gonan be one becaues only 1 root) and show levels
 
 
 graphs = do
@@ -37,20 +74,30 @@ graphs = do
     file <- openFile fileName ReadMode
     -}
 
-    print $ dff graph -- [0] 
-
- 
     -- Start of option menu
 
-    putStrLn ""
-
+    forever $ do
+        graphsMenu graph
 
     putStrLn "Done!"
 
 
+graphsMenu :: Graph -> IO ()
+graphsMenu graph = do
+    putStrLn "Options: \n 1: list vertices \n 2: list edges \n 3: transpose graph for next turn \n 4: dfs \n 5: list reachable nodes from x \n 6: path (returns bool if there's a path from x to y) \n 7: dfs levels (returns a list of lists, each element represnts a node and the eges dfs traversed)"
+    putStrLn "Enter Choice Number: "
+    ns <- getLine
+    let n = read ns :: Int 
+    graphsChoice graph n
 
 
-
-test = do
-    putStrLn "Graph Test"
-
+graphsChoice :: Graph -> Int -> IO ()
+graphsChoice graph option
+    | option == 1 = print $ vertices graph
+    | option == 2 = print $ edges graph
+    | option == 3 = graphsMenu $ transposeG graph
+    | option == 4 = dfsPrimer graph
+    | option == 5 = reachablePrimer graph
+    | option == 6 = pathPrimer graph
+    | option == 7 = levelsPrimer graph 
+    | otherwise = graphsMenu graph
