@@ -1,8 +1,17 @@
 module Graphs where
 
 import Data.Graph
+import Data.Tree
 import System.IO
 import Control.Monad
+import Data.Foldable
+
+
+forestDecode :: Forest a -> [a]
+forestDecode x = toList $ head x
+
+dfs :: Graph -> Int -> IO ()
+dfs graph root = print "t"
 
 
 
@@ -21,19 +30,21 @@ graphs = do
     print $ "User created graph: " ++ show graphU -- print user made graph
     let (graph, nodeFromVertex, vertexFromKey) = graphFromEdges graphU -- from user made graph generate proper graph data structure
     print $ "Haskell generated graph: " ++ show graph
-
-
-
-    print $ dfs graph [0]
-
-        
-
-    {-
+   {-
     putStrLn "Enter the name of your graph file! The format should be that of an adjacency list. An example will follow: \n n1 n2 n3 \n n2 n1 \n n3 n2"
     putStrLn "In this example there are three nodes, n1, n2, and n3. n1 has an edge between n2 and n3. n2 only has an edge with n1, and n3 only has an edge with n2. \n Enter File Name: "
     fileName <- getLine
     file <- openFile fileName ReadMode
     -}
+
+    print $ dff graph -- [0] 
+
+ 
+    -- Start of option menu
+
+    putStrLn ""
+
+
     putStrLn "Done!"
 
 
